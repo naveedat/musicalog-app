@@ -1,0 +1,67 @@
+<div class="example-container mat-elevation-z8">
+    <h2>Musicalog Add Album</h2>
+    <div class="example-loading-shade" *ngIf="isLoadingResults">
+        <mat-spinner *ngIf="isLoadingResults"></mat-spinner>
+    </div>
+    <div class="button-row">
+        <a mat-flat-button color="primary" [routerLink]="['/list-album']">
+            <mat-icon>list</mat-icon>
+        </a>
+    </div>
+    <mat-card class="example-card">
+        <form [formGroup]="albumForm" (ngSubmit)="onFormSubmit()">
+            <mat-form-field class="example-full-width">
+                <mat-label>Album Name</mat-label>
+                <input matInput placeholder="Name" formControlName="name" [errorStateMatcher]="matcher">
+                <mat-error>
+                    <span *ngIf="!albumForm.get('name').valid && albumForm.get('name').touched">Please enter Name</span>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Artist</mat-label>
+                <input matInput placeholder="Artist" formControlName="artist" [errorStateMatcher]="matcher">
+                <mat-error>
+                    <span *ngIf="!albumForm.get('artist').valid && albumForm.get('artist').touched">Please enter
+                        Artist</span>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Label</mat-label>
+                <input matInput placeholder="Label" formControlName="label" [errorStateMatcher]="matcher">
+                <mat-error>
+                    <span *ngIf="!albumForm.get('label').valid && albumForm.get('label').touched">Please enter
+                        Label</span>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Type</mat-label>
+                <mat-select formControlName="type">
+                    <mat-option *ngFor="let sl of typeList" [value]="sl">
+                        {{sl}}
+                    </mat-option>
+                </mat-select>
+                <mat-error>
+                    <span *ngIf="!albumForm.get('type').valid && albumForm.get('type').touched">Please select
+                        Type</span>
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <mat-label>Stock</mat-label>
+                <mat-select formControlName="stock">
+                    <mat-option *ngFor="let sl of stockList" [value]="sl">
+                        {{sl}}
+                    </mat-option>
+                </mat-select>
+                <mat-error>
+                    <span *ngIf="!albumForm.get('stock').valid && albumForm.get('stock').touched">Please select
+                        Stock</span>
+                </mat-error>
+            </mat-form-field>
+            <div class="button-row">
+                <button type="submit" [disabled]="!albumForm.valid" mat-flat-button color="primary">
+                    <mat-icon>save</mat-icon>
+                </button>
+            </div>
+        </form>
+    </mat-card>
+</div>
